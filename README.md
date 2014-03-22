@@ -1,4 +1,7 @@
 hsrm-ws2012-weban
 =================
+Auszug
+Web Anwendungen Sommersemester 2012
 
-Web Anwendungen
+Team Mitglieder: 
+Alexander Knobloch, Marc-David Radziwill
