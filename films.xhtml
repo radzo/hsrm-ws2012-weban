@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ui:composition 
+	xmlns="http://www.w3.org/1999/xhtml"
+  	xmlns:h="http://java.sun.com/jsf/html"
+  	xmlns:f="http://java.sun.com/jsf/core"
+   	xmlns:ui="http://java.sun.com/jsf/facelets"
+   	template="/templates/layout.xhtml">
+   	
+   	<!-- This content goes into the "header" section in layout.xhtml -->
+	<ui:define name="header">
+		<h2>Filme</h2>
+	</ui:define>
+	
+	<!-- This content goes into the "content" section in layout.xhtml -->
+	<ui:define name="content">
+		<h:form prependId="false"> 
+			<h:dataTable id="films-table" var="film" value="#{fbb.films}" 
+				rows="10" first="#{fbb.first}"
+				styleClass="order-table"
+				headerClass="order-table-header" 
+				rowClasses="order-table-odd-row, order-table-even-row">
+				<h:column>
+					<f:facet name="header">filmId</f:facet>
+					<h:outputText value="#{film.filmId}"/>
+				</h:column>
+				<h:column>
+					<f:facet name="header">category</f:facet>
+					<h:outputText value="#{film.category.name}"/>
+				</h:column>
+				<h:column>
+					<f:facet name="header">title</f:facet>
+					<h:outputText value="#{film.title}"/>
+				</h:column>
+				<h:column>
+					<f:facet name="header">description</f:facet>
+					<h:outputText value="#{film.description}"/>
+				</h:column>
+				<h:column>
+					<f:facet name="header">rental rate</f:facet>
+					<h:outputText value="#{film.rentalRate}"/>
+				</h:column>
+				<h:column>
+					<f:facet name="header">length</f:facet>
+					<h:outputText value="#{film.length}"/>
+				</h:column>
+				<h:column>
+					<f:facet name="header">replacement cost</f:facet>
+					<h:outputText value="#{film.replacementCost}"/>
+				</h:column>
+				<h:column>
+					<f:facet name="header">rating</f:facet>
+					<h:outputText value="#{film.rating}"/>
+				</h:column>	
+			</h:dataTable>
+			<h:messages/>
+		</h:form>
+		<div class="pagination">	
+			<h:form>
+				<h:panelGroup>
+					<h:commandButton value="Anfang" action="#{fbb.gotoBegin}" rendered="#{fbb.first &gt;= 10}"/>	
+					<h:commandButton value="Zurueck" action="#{fbb.backward}" rendered="#{fbb.first &gt;= 10}"/>	
+					<ui:repeat var="i" value="#{fbb.pages}">
+						<h:column>
+							<h:commandButton value="#{i}" action="#{fbb.gotoPage(i)}"/>
+						</h:column>
+					</ui:repeat>
+					<h:commandButton value="Weiter" action="#{fbb.forward}" rendered="#{fbb.first &lt; fbb.max}"/>
+					<h:commandButton value="Ende" action="#{fbb.gotoEnd}" rendered="#{fbb.first &lt; fbb.max}"/>
+				</h:panelGroup>
+				<h:messages/>
+			</h:form>
+		</div>
+		
+		</ui:define>
+</ui:composition>
+
